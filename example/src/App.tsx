@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { init } from './initDB';
-import type { Knex } from 'react-native-knex';
+import type { Knex } from 'react-native-jsi-knex';
 
 interface Search {
   readonly id: number;

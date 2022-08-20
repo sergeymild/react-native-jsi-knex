@@ -1,5 +1,8 @@
 # react-native-jsi-knex
-React Native knex based on jsi quickSqlite
+Fork of [Knex](https://knexjs.org/) library optimized for mobile platforms.
+Removed everything except SQLite support.
+For Native connection it uses JSI library [react-native-quick-sqlite](https://github.com/ospfranco/react-native-quick-sqlite) under the hood
+so there is no any performance issues due to React Native Bridge ans serialization/deserialization
 ## Installation
 
 Add to `package.json`
@@ -12,9 +15,9 @@ Add to `package.json`
 ## Initialize
 
 ```js
+import { Knex, initialize as initializeKnex } from 'react-native-jsi-knex';
 
-
-export const initializeKnex = async (): Promise<Knex> => {
+export const initializeDatabase = async (): Promise<Knex> => {
   return await initializeKnex({
     name: 'mydb.sqlite',
     debug: true,
@@ -55,7 +58,7 @@ let didRun = false
 export let knexDatabase!: Knex
 export const database = memoize(async () => {
   if (didRun || knexDatabase) return knexDatabase!
-  knexDatabase = await initializeKnex()
+  knexDatabase = await initializeDatabase()
   return knexDatabase
 })
 ```
