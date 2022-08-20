@@ -25,7 +25,7 @@ export default function App() {
         onPress={async () => {
           const response = await db!
             .table<Search>('search')
-            .where({ query: 's' })
+            .select('id')
             .where('query', 'ww')
             .first();
         }}

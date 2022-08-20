@@ -60,20 +60,27 @@ export const database = memoize(async () => {
 })
 ```
 
-### Example of usage
+### Knex Query Builder
 
 ```ts
-interface Search {
-  readonly id: number
-  readonly query: string
+interface User {
+  id: number;
+  name: string;
+  age: number;
 }
 
-const response = await database
-  .table<Search>('searches')
-  .where({id: 2, query: 'string'})
-  .first()
-console.log(response.id, response.query)
+await knex.table<User>('users') // User is the type of row in database
+  .where('id', 1) // Your IDE will be able to help with the completion of id
+  .first(); // Resolves to User | undefined
+
+// Type of users is inferred as Pick<User, "id" | "age">[]
+const users = await knex<User>('users')
+  .select('id')
+  .select('age')
 ```
+
+### Most of api works identically as original Knex library for node.js.
+### Full documentation may be found at https://knexjs.org/guide/query-builder.html
 
 ## Contributing
 
