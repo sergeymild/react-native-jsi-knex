@@ -5,14 +5,16 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator='iPhone X'",
     "start": "react-native start",
     "pods": "pod-install --quiet",
     "postinstall": "patch-package"
   },
   "dependencies": {
     "react": "17.0.2",
-    "react-native": "0.68.2"
+    "react-native": "0.68.2",
+    "react-native-quick-sqlite": "^4.0.5",
+    "react-native-knex": "sergeymild/react-native-knex"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

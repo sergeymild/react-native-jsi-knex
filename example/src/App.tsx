@@ -1,18 +1,37 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-jsi-knex';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { init } from './initDB';
+import type { Knex } from 'react-native-knex';
+
+interface Search {
+  readonly id: number;
+  readonly query: string;
+}
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [db, setDb] = React.useState<Knex | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    const i = async () => {
+      setDb(await init());
+    };
+    i();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TouchableOpacity
+        onPress={async () => {
+          const response = await db!
+            .table<Search>('search')
+            .where({ query: 's' })
+            .where('query', 'ww')
+            .first();
+        }}
+      >
+        <Text>Make query</Text>
+      </TouchableOpacity>
     </View>
   );
 }
