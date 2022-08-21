@@ -24,7 +24,7 @@ export const initializeDatabase = async (): Promise<Knex> => {
     // set version 1 as initial version (set 2 to run migrations for version: 2)
     // migration will be called from version which stored in db to passed
     // for example if version in db is 3 and set new version 10
-    // all migrations from 4 to 10 will be executed (if they has) 
+    // all migrations from 4 to 10 will be executed.
     version: 1,
     createTables,
     // migrations will be run on increment knex version
