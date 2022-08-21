@@ -81,7 +81,7 @@ await knex.table<User>('users') // User is the type of row in database
   .first(); // Resolves to User | undefined
 
 // Type of users is inferred as Pick<User, "id" | "age">[]
-const users = await knex<User>('users')
+const users = await knex.table<User>('users')
   .select('id')
   .select('age')
 ```
